@@ -1,0 +1,18 @@
+FROM centos
+
+MAINTAINER Shivaji Deotale
+
+RUN mkdir /opt/java/
+ADD packages/jdk-8u251-linux-x64.tar.gz /opt/java/
+
+ENV JAVA_HOME="/opt/java/jdk1.8.0_251"
+ENV PATH="${JAVA_HOME}/bin:${PATH}"
+
+RUN java -version
+
+RUN mkdir /opt/tomcat/
+ADD packages/apache-tomcat-9.0.8.tar.gz /opt/tomcat/
+
+EXPOSE 8080
+
+CMD ["/opt/tomcat/apache-tomcat-9.0.8/bin/catalina.sh", "run"]
